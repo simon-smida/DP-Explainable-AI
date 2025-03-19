@@ -19,6 +19,9 @@ What It Demonstrates:
 - Progressive Layer Transformations: each hidden layer incrementally warps the data.
 - Decision Boundaries: exhibits how the classification boundary evolves over training.
 
+Useful Resources:
+- Theory: https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/
+- Code Inspiration: https://igreat.github.io/blog/manifold_hypothesis/
 """
 
 import torch
