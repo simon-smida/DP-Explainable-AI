@@ -167,42 +167,93 @@ grid_activations = get_activations(model, grid_tensor)
 layers = ["Input", "Layer 1", "Layer 2", "Layer 3", "Layer 4", "Output"]
 
 
-# --- Animate the Transformation Between Layers ---
+# --- Animate the Transformation Between Layers with Grid Deformation ---
 plt.ion()
 fig2, ax2 = plt.subplots(figsize=(6, 6))
 title_text = fig2.suptitle("", fontsize=14)
 n_steps = 30  # Number of steps between layers (interpolation)
 
-for i in range(len(layers) - 1):
-    start_red, end_red = red_activations[i], red_activations[i + 1]  # Red spiral
-    start_blue, end_blue = blue_activations[i], blue_activations[i + 1]  # Blue spiral
-    start_grid, end_grid = grid_activations[i], grid_activations[i + 1]
+# Create a more structured grid for visualization
+x_grid = np.linspace(-3, 3, 15)
+y_grid = np.linspace(-3, 3, 15)
+xx, yy = np.meshgrid(x_grid, y_grid)
 
+# Create horizontal and vertical grid lines
+h_lines = np.array([np.column_stack((xx[i, :], yy[i, :])) for i in range(xx.shape[0])])
+v_lines = np.array([np.column_stack((xx[:, i], yy[:, i])) for i in range(xx.shape[1])])
+
+# Convert to torch tensors
+h_lines_tensors = [torch.tensor(line, dtype=torch.float32) for line in h_lines]
+v_lines_tensors = [torch.tensor(line, dtype=torch.float32) for line in v_lines]
+
+# Get activations for each grid line
+h_lines_activations = []
+v_lines_activations = []
+
+for i in range(len(h_lines_tensors)):
+    h_lines_activations.append(get_activations(model, h_lines_tensors[i]))
+    
+for i in range(len(v_lines_tensors)):
+    v_lines_activations.append(get_activations(model, v_lines_tensors[i]))
+
+# Now animate the transformation
+for i in range(len(layers) - 1):
+    start_red, end_red = red_activations[i], red_activations[i + 1]
+    start_blue, end_blue = blue_activations[i], blue_activations[i + 1]
+    
     for alpha in np.linspace(0, 1, n_steps):
         inter_red = (1 - alpha) * start_red + alpha * end_red
         inter_blue = (1 - alpha) * start_blue + alpha * end_blue
-        inter_grid = (1 - alpha) * start_grid + alpha * end_grid
-
+        
+        # Interpolate grid lines
         ax2.clear()
+        ax2.axis('off')
+        
+        # Plot horizontal grid lines
+        for h_line_acts in h_lines_activations:
+            start_h = h_line_acts[i]
+            end_h = h_line_acts[i + 1]
+            inter_h = (1 - alpha) * start_h + alpha * end_h
+            ax2.plot(inter_h[:, 0], inter_h[:, 1], 'gray', alpha=0.3)
+            
+        # Plot vertical grid lines
+        for v_line_acts in v_lines_activations:
+            start_v = v_line_acts[i]
+            end_v = v_line_acts[i + 1]
+            inter_v = (1 - alpha) * start_v + alpha * end_v
+            ax2.plot(inter_v[:, 0], inter_v[:, 1], 'gray', alpha=0.3)
+        
+        # Plot data points
         ax2.scatter(inter_red[:, 0], inter_red[:, 1], color="r", s=30, alpha=0.8)
         ax2.scatter(inter_blue[:, 0], inter_blue[:, 1], color="b", s=30, alpha=0.8)
-        ax2.scatter(inter_grid[:, 0], inter_grid[:, 1], s=5, alpha=0.2)
-
-        # Set fixed limits if preferred
-        # ax2.set_xlim(-3, 3)
-        # ax2.set_ylim(-3, 3)
-
+        
+        # Add automatic axis limits with some padding
+        all_x = np.concatenate([inter_red[:, 0], inter_blue[:, 0]])
+        all_y = np.concatenate([inter_red[:, 1], inter_blue[:, 1]])
+        x_min, x_max = np.min(all_x), np.max(all_x)
+        y_min, y_max = np.min(all_y), np.max(all_y)
+        padding = 0.5
+        ax2.set_xlim(x_min - padding, x_max + padding)
+        ax2.set_ylim(y_min - padding, y_max + padding)
+        
         title_text.set_text(f"Transition: {layers[i]} → {layers[i+1]} ({alpha:.2f})")
-
-        ax2.grid(True, linestyle="--", alpha=0.7)
-        ax2.set_aspect("equal")
-
-        if i + 1 == len(layers) - 1 and alpha == 1:
-            ax2.axvline(x=0, color="black", linestyle="-", label="Decision Boundary")
-            ax2.set_xlim(-5, 5)
-            ax2.set_ylim(-5, 5)
-            ax2.legend()
-
+        
+        # Add a shaded decision boundary in the final layer
+        if i + 1 == len(layers) - 1:
+            x_range = np.linspace(x_min - padding, x_max + padding, 100)
+            y_range = np.linspace(y_min - padding, y_max + padding, 100)
+            xx_fine, yy_fine = np.meshgrid(x_range, y_range)
+            if alpha > 0.5:  # Only show decision boundary in latter half of transition
+                boundary_alpha = (alpha - 0.5) * 2  # Gradually increase opacity
+                # For the output layer, we know the decision boundary is at x=0
+                ax2.axvline(x=0, color="black", linestyle='-', alpha=boundary_alpha, 
+                           label="Decision Boundary")
+                ax2.fill_betweenx([y_min - padding, y_max + padding], -10, 0, 
+                                 color='blue', alpha=0.1*boundary_alpha)
+                ax2.fill_betweenx([y_min - padding, y_max + padding], 0, 10, 
+                                 color='red', alpha=0.1*boundary_alpha)
+        
+        ax2.set_aspect('equal')
         plt.draw()
         plt.pause(0.05)
 
