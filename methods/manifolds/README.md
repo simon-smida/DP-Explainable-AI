@@ -29,12 +29,12 @@ Neural networks are powerful because they transform complicated, overlapping dat
     
 - **Neural Network Training** (decision boundary forming):
 <p align="center">
-  <img src="../utils/spirals-learning.gif" width="300">
+  <img src="utils/spirals-learning.gif" width="300">
 </p>
 
 - **Feature Space Transformations** (at each layer):
 <p align="center">
-  <img src="../utils/spirals-activations.gif" width="300">
+  <img src="utils/spirals-activations.gif" width="300">
 </p>
 
 ## Disk & Ring Dataset: Simplifying Radial Data
@@ -47,14 +47,14 @@ Neural networks are powerful because they transform complicated, overlapping dat
 
 - **Network Training: 2 hidden units (left) vs. 3 hidden units (right)**
 <p align="center">
-  <img src="../utils/disks-learning-2d.gif" width="300">
-  <img src="../utils/disks-learning-3d.gif" width="300">
+  <img src="utils/disks-learning-2d.gif" width="300">
+  <img src="utils/disks-learning-3d.gif" width="300">
 </p>
 
 - **Feature Space Transformations: 2 hidden units (left) vs. 3 hidden units (right)**:
 <p align="center">
-  <img src="../utils/disks-activations-2d.gif" width="300">
-  <img src="../utils/disks-activations-3d.gif" width="300">
+  <img src="utils/disks-activations-2d.gif" width="300">
+  <img src="utils/disks-activations-3d.gif" width="300">
 </p>
 
 ### MNIST Dataset: Simplifying Digit Recognition
@@ -67,13 +67,14 @@ Neural networks are powerful because they transform complicated, overlapping dat
 
 - **Feature Space Transformation** of MNIST digit classification (using PCA):
 <p align="center">
-  <img src="../utils/mnist_layer_transformation.gif" width="500">
+  <img src="utils/mnist_layer_transformation.gif" width="500">
 </p>
 
 ## Project Structure
 
 ```
 .
+├── utils/
 ├── manifolds_spirals.py   # Spiral dataset visualization
 ├── manifolds_disks.py     # Disk and ring dataset visualization
 ├── manifolds_mnist.py     # MNIST digits visualization
