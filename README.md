@@ -20,12 +20,14 @@ Jupyter notebooks in each specific experiment folder are organized in such a way
 The simplest way to tweak the experiments is to create a python virtual environment, install all the required dependencies, and that's all.
 
 ```
-python -m venv .venv
-source .venv/bin/activate        # On Unix/macOS
-.venv\\Scripts\\activate.bat     # On Windows
+> python -m venv .venv
+> source .venv/bin/activate        # On Unix/macOS
+> .venv\\Scripts\\activate.bat     # On Windows
 
-pip install -r requirements.txt
+> pip install -r requirements.txt
 ```
+
+To work with ImageNet experiments, downlaod the [imagenet50-samples](https://drive.google.com/drive/folders/1IXOlElHJFRBFnM3mCLzUTPPRauiacT-h?usp=sharing) containing subset data.
 
 ---
 
