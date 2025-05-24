@@ -1,5 +1,5 @@
 ## Methods Supporting Interpretable and Explainable ML
-This repository contains all experiments related to the Master's Thesis, with ability to reproduce the obtained results.
+This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.
 
 ### Directory Structure 
 ```
@@ -12,12 +12,12 @@ Experiments/
 └── requirements.txt
 ```
 
-Each directory contains specific experimental analysis, following the Master's Thesis outline. Each experiment is self-contained and can be executed independently. See individual notebooks or scripts for details and instructions.
+Each directory contains a specific experimental analysis, following the Master's Thesis outline. Each experiment is self-contained and can be executed independently. See individual notebooks or scripts for details and instructions.
 
 ### Results Reproduction
 Jupyter notebooks in each specific experiment folder are organized in such a way that they contain all the necessary functions and utilities, which can be directly tweaked (in the notebook file). 
 
-The simplest way to tweak the experiments is to create a python virtual environment, install all the required dependencies, and that's all.
+The simplest way to tweak the experiments is to create a Python virtual environment, install all the required dependencies, and that's all.
 
 ```
 > python -m venv .venv
@@ -27,7 +27,7 @@ The simplest way to tweak the experiments is to create a python virtual environm
 > pip install -r requirements.txt
 ```
 
-To work with ImageNet experiments, downlaod the [imagenet50-samples](https://drive.google.com/drive/folders/1IXOlElHJFRBFnM3mCLzUTPPRauiacT-h?usp=sharing) containing subset data.
+To work with ImageNet experiments, download the [imagenet50-samples](https://drive.google.com/drive/folders/1IXOlElHJFRBFnM3mCLzUTPPRauiacT-h?usp=sharing) containing subset data.
 
 ---
 
@@ -44,7 +44,7 @@ To work with ImageNet experiments, downlaod the [imagenet50-samples](https://dri
 - `ex2b_imagenet_xai.ipynb`: XAI method comparison on ImageNet.
 - `figures/`: Radar plots, method comparisons, sensitivity analysis.
 - `imagenet50-samples/`: Preprocessed ImageNet subset.
-- `models/`: Custom trained CNN for MNIST.
+- `models/`: Custom-trained CNN for MNIST.
 
 ### `Experiments/ex3-robustness-of-explanations/`
 - **Robustness of Explanations under various conditions**
