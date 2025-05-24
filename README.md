@@ -1,10 +1,7 @@
 ## Methods Supporting Interpretable and Explainable ML
-
-<div align="center">
-  <img src="utils/logo-gh-background.png" alt="dp-logo" width="100"  style="opacity: 0.5;">
-</div>
-
 This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.
+
+The thesis was presented at [excel@fit 2025](https://excel.fit.vutbr.cz/sbornik/) student conference.
 
 ### Directory Structure 
 ```
