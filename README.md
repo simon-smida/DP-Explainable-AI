@@ -1,5 +1,9 @@
 ## Methods Supporting Interpretable and Explainable ML
-This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.
+<p>
+  <img src="utils/deepinsight_logo.png" alt="dp-logo" width="100" style="vertical-align:middle; margin-right:10px;"/> 
+  <span>This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.</span>
+</p>
+
 
 ### Directory Structure 
 ```
