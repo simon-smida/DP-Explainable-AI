@@ -1,9 +1,10 @@
 ## Methods Supporting Interpretable and Explainable ML
-<p>
-  <img src="utils/deepinsight_logo.png" alt="dp-logo" width="100" style="vertical-align:middle; margin-right:10px;"/> 
-  <span>This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.</span>
-</p>
 
+<div align="center">
+  <img src="utils/logo-gh-background.png" alt="dp-logo" width="100"  style="opacity: 0.5;">
+</div>
+
+This repository contains all experiments related to the Master's Thesis, with the ability to reproduce the obtained results.
 
 ### Directory Structure 
 ```
